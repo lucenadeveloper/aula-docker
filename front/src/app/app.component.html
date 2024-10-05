@@ -23,11 +23,10 @@
 
     <!-- Lista de usuários -->
      <div class="users">
-      <div *ngFor="let usuario of usuarios; let i = index" class="card">
+      <div *ngFor="let pessoa of pessoas; let i = index" class="card">
         <div class="card-body user">
-          <h5 class="card-title">{{ usuario.nome }}</h5>
-          <p class="card-text">Idade: {{ usuario.idade }}</p>
-          <button class="btn btn-danger" (click)="excluirUsuario(i)">Excluir</button>
+          <h5 class="card-title">{{ pessoa.nome }}</h5>
+          <p class="card-text">Idade: {{ pessoa.idade }}</p>
         </div>
       </div>
     </div>
