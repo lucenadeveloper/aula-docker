@@ -1,0 +1,10 @@
+// Adicionar pessoa
+curl --location 'localhost:3000/pessoas' \
+--header 'Content-Type: application/json' \
+--data '{
+    "nome": "Rafa",
+    "idade": 28
+}'
+
+// Buscar pessoas
+curl --location 'localhost:3000/pessoas'
