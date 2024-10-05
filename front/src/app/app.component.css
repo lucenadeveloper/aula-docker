@@ -1,0 +1,26 @@
+.container {
+  padding-top: 32px;
+  gap: 32px;
+  display: flex;
+}
+
+.content {
+  display: flex;
+  gap: 32px;
+}
+
+.form {
+  min-width: 250px;
+  height: 100%;
+}
+
+.users {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.user {
+  min-width: 200px;
+}

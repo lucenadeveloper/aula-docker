@@ -1,0 +1,29 @@
+# Etapa 1: Construir a aplicação
+FROM node:22-alpine AS build
+
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Copia os arquivos de configuração do package.json e package-lock.json
+COPY package*.json ./
+
+# Instala as dependências
+RUN npm install
+
+# Copia os arquivos da aplicação para o contêiner
+COPY . .
+
+# Cria a aplicação Angular
+RUN npm run build --prod
+
+# Etapa 2: Servir a aplicação
+FROM nginx:alpine
+
+# Copia os arquivos gerados da construção anterior para o diretório padrão do Nginx
+COPY --from=build /app/dist/front/browser /usr/share/nginx/html
+
+# Expõe a porta 80
+EXPOSE 80
+
+# Comando padrão para executar o Nginx
+CMD ["nginx", "-g", "daemon off;"]
