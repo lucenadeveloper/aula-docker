@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  # Container do Frontend
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: front
+    ports:
+      - "8080:80"
+    networks:
+      - network-pessoas
+    depends_on:
+      - back
+
+  # Container do Backend
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: back
+    ports:
+      - "3000:3000"
+    networks:
+      - network-pessoas
+    depends_on:
+      - mongo
+
+  # Container do MongoDB
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - network-pessoas
+
+# Definindo a network para conectar os containers
+networks:
+  network-pessoas:
+    driver: bridge
+
+# Volume para persistir os dados do MongoDB
+volumes:
+  mongo-data:
