@@ -8,7 +8,7 @@ const app = express();
 
 // Configurações
 const PORT = process.env.PORT || 3000;
-const MONGO_URI = 'mongodb://localhost:27017/mongo'; // Substitua pelo seu URI do MongoDB
+const MONGO_URI = 'mongodb://mongo:27017/mongo'; // Substitua pelo seu URI do MongoDB
 
 // Conexão com o MongoDB
 mongoose.connect(MONGO_URI)

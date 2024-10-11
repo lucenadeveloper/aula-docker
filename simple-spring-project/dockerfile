@@ -1,0 +1,31 @@
+# Etapa 1: Build
+FROM gradle:jdk21 AS build
+WORKDIR /app
+
+# Copiar o Gradle Wrapper e os arquivos do projeto
+COPY gradlew .
+COPY gradle ./gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src ./src
+
+# Conceder permissão de execução para o Gradle Wrapper
+RUN chmod +x ./gradlew
+
+# Build do projeto
+RUN ./gradlew build -x test
+
+# Etapa 2: Runtime
+FROM eclipse-temurin:21-jdk-jammy
+
+# Definir o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copiar o JAR gerado na etapa de build
+COPY --from=build /app/build/libs/*.jar app.jar
+
+# Expor a porta da aplicação
+EXPOSE 8080
+
+# Comando para rodar a aplicação
+ENTRYPOINT ["java", "-jar", "app.jar"]
