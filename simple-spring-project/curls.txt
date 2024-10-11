@@ -1,0 +1,7 @@
+// POST DE NOME
+curl --location --request POST 'localhost:8080/hello-world/rafa' \
+--header 'Content-Type: application/json' \
+--data ''
+
+// GET DE NOMES
+curl --location 'localhost:8080/hello-world/random-list'
